@@ -1,0 +1,320 @@
+/* AutomationField marketing site — theme tokens mirror the product's own
+   static/css/theme.css so this page reads as the same system. */
+:root {
+  --bg-base:    #191B1E;
+  --bg-panel:   #202226;
+  --bg-raised:  #24272c;
+  --bg-sunken:  #131416;
+  --border:     #2F3134;
+  --border-hi:  #3a3d42;
+  --text-1:     #FFFFFE;
+  --text-2:     #90949a;
+  --text-3:     #5c6066;
+  --accent:     #F76236;
+  --accent-dim: #2d1508;
+  --accent-glow: rgba(247, 98, 54, 0.35);
+  --ok:         #34d399;
+  --warn:       #fbbf24;
+  --bad:        #f87171;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg-base);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-1);
+  font-family: var(--font-body);
+}
+
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+::selection {
+  background: var(--accent);
+  color: var(--bg-base);
+}
+
+/* Faint blueprint grid used behind the hero + section backdrops. */
+.grid-backdrop {
+  background-image:
+    linear-gradient(to right, rgba(144, 148, 154, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(144, 148, 154, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 45%, transparent 90%);
+          mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 45%, transparent 90%);
+}
+
+/* ---------- Nav ---------- */
+.site-nav {
+  background: rgba(25, 27, 30, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-link {
+  color: var(--text-2);
+  transition: color 150ms ease;
+}
+.nav-link:hover { color: var(--text-1); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.3rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+  white-space: nowrap;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--accent);
+  color: #1a0a02;
+  box-shadow: 0 0 0 1px rgba(247, 98, 54, 0.5), 0 8px 24px -8px var(--accent-glow);
+}
+.btn-primary:hover { background: #ff7a49; }
+
+.btn-ghost {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-color: #3a1c0c;
+}
+.btn-ghost:hover { background: #351707; border-color: #4a2410; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-2);
+  border-color: var(--border);
+}
+.btn-outline:hover { color: var(--text-1); background: var(--bg-raised); border-color: var(--border-hi); }
+
+/* ---------- Eyebrow / labels ---------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- Cards ---------- */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+}
+
+.feature-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  transition: border-color 200ms ease, background 200ms ease, transform 200ms ease;
+}
+.feature-card:hover {
+  border-color: #4a3323;
+  background: var(--bg-raised);
+  transform: translateY(-2px);
+}
+
+.icon-badge {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: var(--accent-dim);
+  border: 1px solid #3a1c0c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ---------- Status dot ---------- */
+.dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.dot-ok { background: var(--ok); box-shadow: 0 0 8px rgba(52, 211, 153, 0.6); }
+.dot-live {
+  background: var(--ok);
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ---------- Telemetry ticker ---------- */
+.ticker {
+  border: 1px solid var(--border);
+  background: var(--bg-sunken);
+  border-radius: 0.65rem;
+  overflow: hidden;
+}
+.ticker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  border-top: 1px solid var(--border);
+}
+.ticker-row:first-child { border-top: none; }
+.ticker-tag { color: var(--text-2); letter-spacing: 0.03em; }
+.ticker-val { color: var(--text-1); font-weight: 500; }
+.ticker-val.flash { animation: flash-val 700ms ease; }
+@keyframes flash-val {
+  0% { color: var(--accent); }
+  100% { color: var(--text-1); }
+}
+
+/* ---------- Hero screenshot frame ---------- */
+.hmi-frame {
+  position: relative;
+  border-radius: 0.9rem;
+  border: 1px solid var(--border-hi);
+  background: linear-gradient(180deg, #24272c, #1c1e22);
+  padding: 0.6rem;
+  box-shadow:
+    0 30px 80px -30px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(0,0,0,0.2),
+    0 0 120px -40px var(--accent-glow);
+}
+.hmi-frame .bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.4rem 0.55rem;
+}
+.hmi-frame .bar span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--border-hi);
+}
+.hmi-frame img {
+  border-radius: 0.5rem;
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--bg-sunken);
+}
+
+/* ---------- Architecture flow diagram ---------- */
+/* 4 nodes + 3 connectors = 7 explicit columns, so this stays one readable
+   left-to-right row on desktop instead of wrapping mid-sequence. */
+.flow-wrap {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+@media (max-width: 900px) {
+  .flow-wrap { grid-template-columns: 1fr; }
+}
+
+.flow-node {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  padding: 1.25rem 1.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.flow-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 2.5rem;
+}
+.flow-connector svg { overflow: visible; }
+.flow-connector .flow-line {
+  stroke: var(--border-hi);
+  stroke-width: 2;
+}
+.flow-connector .flow-dash {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 6 10;
+  animation: flow-move 1.6s linear infinite;
+}
+@keyframes flow-move {
+  to { stroke-dashoffset: -32; }
+}
+@media (max-width: 900px) {
+  .flow-connector { min-height: 2.5rem; }
+  .flow-connector svg { transform: rotate(90deg); }
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Testers banner (borrows the product's own alert-banner style) ---------- */
+.alert-banner {
+  border: 1px solid #4a2410;
+  background: linear-gradient(180deg, rgba(247,98,54,0.09), rgba(247,98,54,0.03));
+  border-radius: 0.85rem;
+}
+
+/* ---------- Mobile nav ---------- */
+#mobile-nav {
+  transition: max-height 250ms ease, opacity 200ms ease;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  /* Solid, not translucent: this sits under a fixed header and must stay
+     legible even where backdrop-filter isn't available/composited. */
+  background: var(--bg-base);
+}
+#mobile-nav.open {
+  max-height: 24rem;
+  opacity: 1;
+}
+
+/* ---------- Scrollbar (Webkit) ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #4a4d52; }

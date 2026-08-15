@@ -1,0 +1,11 @@
+# Assistant/task notes — local only
+CLAUDE.md
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node (only if screenshot/build tooling is ever run locally)
+node_modules/

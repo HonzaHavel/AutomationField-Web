@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AutomationField — Real-Time SCADA, Self-Hosted</title>
+<meta name="description" content="AutomationField is a self-hosted SCADA dashboard for real-time PLC monitoring and control over OPC UA — live WebSocket updates, an engineering portal, alarms, and trends, all in one Go binary." />
+<meta name="theme-color" content="#191B1E" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="AutomationField — Real-Time SCADA, Self-Hosted" />
+<meta property="og:description" content="A self-hosted SCADA dashboard that talks OPC UA straight to your PLCs and streams live state to the browser over WebSocket." />
+<meta property="og:image" content="assets/img/shot-analytics.webp" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="assets/css/style.css" />
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+</head>
+<body class="font-sans" style="background:var(--bg-base); color:var(--text-1);">
+
+<!-- ============ NAV ============ -->
+<header class="site-nav fixed top-0 inset-x-0 z-50">
+  <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2.5 shrink-0">
+      <span class="w-7 h-7 rounded-md flex items-center justify-center" style="background:var(--accent-dim); border:1px solid #3a1c0c;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:var(--accent);">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+        </svg>
+      </span>
+      <span class="font-display font-semibold text-sm tracking-wide" style="color:var(--text-1);">AutomationField</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-7 font-mono text-xs uppercase tracking-widest">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#how-it-works" class="nav-link">How it works</a>
+      <a href="#preview" class="nav-link">Preview</a>
+      <a href="#testers" class="nav-link">Testers</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="hidden md:block">
+      <a href="mailto:haveljan002@gmail.com" class="btn btn-primary">Get in touch</a>
+    </div>
+
+    <button id="nav-toggle" aria-expanded="false" aria-label="Toggle menu" class="md:hidden p-2 -mr-2" style="color:var(--text-2);">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-nav" class="md:hidden border-t" style="border-color:var(--border);">
+    <nav class="flex flex-col gap-1 px-5 py-3 font-mono text-xs uppercase tracking-widest">
+      <a href="#features" class="nav-link py-2">Features</a>
+      <a href="#how-it-works" class="nav-link py-2">How it works</a>
+      <a href="#preview" class="nav-link py-2">Preview</a>
+      <a href="#testers" class="nav-link py-2">Testers</a>
+      <a href="#contact" class="nav-link py-2">Contact</a>
+      <a href="mailto:haveljan002@gmail.com" class="btn btn-primary mt-2 justify-center">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 px-5 overflow-hidden">
+    <div class="grid-backdrop absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+    <div class="relative max-w-6xl mx-auto grid lg:grid-cols-[1.05fr,0.95fr] gap-14 items-center">
+
+      <div>
+        <p class="eyebrow mb-5">OPC UA · WebSocket · Self-Hosted</p>
+        <h1 class="font-display font-semibold leading-[1.05] text-4xl sm:text-5xl xl:text-6xl mb-6" style="color:var(--text-1);">
+          Real-time SCADA.<br />
+          <span style="color:var(--accent);">Zero</span> platform lock-in.
+        </h1>
+        <p class="text-base sm:text-lg leading-relaxed mb-8 max-w-xl" style="color:var(--text-2);">
+          AutomationField talks straight to your PLCs over OPC&nbsp;UA and pushes every
+          state change to the browser over WebSocket — one self-hosted Go binary,
+          no cloud dependency, no per-tag licensing.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 mb-10">
+          <a href="mailto:haveljan002@gmail.com" class="btn btn-primary">Get in touch</a>
+          <a href="#testers" class="btn btn-outline">Looking for testers ↓</a>
+        </div>
+
+        <div class="max-w-sm">
+          <p class="eyebrow mb-2 flex items-center gap-2">
+            <span class="dot dot-live"></span> Live tag feed (illustrative)
+          </p>
+          <div class="ticker" id="telemetry-ticker"></div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="hmi-frame">
+          <div class="bar"><span></span><span></span><span></span></div>
+          <img src="assets/img/shot-analytics.webp" width="2200" height="1375" loading="eager"
+               alt="AutomationField analytics dashboard showing OEE, plant uptime, active alarms, production rate, equipment status, and recent alarm activity" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ TECH STRIP ============ -->
+  <section class="py-6 px-5" style="border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--bg-sunken);">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3 font-mono text-xs uppercase tracking-widest" style="color:var(--text-3);">
+      <span>Go</span>
+      <span>OPC UA</span>
+      <span>WebSocket</span>
+      <span>SQLite</span>
+      <span>SVG Mimics</span>
+      <span>No Build Step</span>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section id="features" class="py-24 px-5">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl mb-14 reveal">
+        <p class="eyebrow mb-3">What it does</p>
+        <h2 class="font-display font-semibold text-3xl sm:text-4xl mb-4" style="color:var(--text-1);">
+          Built for the plant floor, not a demo reel.
+        </h2>
+        <p class="text-base leading-relaxed" style="color:var(--text-2);">
+          Every feature exists because a real process needed it.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+        <div class="feature-card p-5 reveal">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.5 12h3.5l2-6 3 12 2.5-9 1.5 3h6.5" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Real-time monitoring</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-2);">OPC UA subscriptions push every state change to the browser over WebSocket — no polling, no refresh button.</p>
+        </div>
+
+        <div class="feature-card p-5 reveal">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Live mimic diagrams</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-2);">Plant layouts are just SVG — element colors and states update live as the process runs, drawn the way your engineers actually draw it.</p>
+        </div>
+
+        <div class="feature-card p-5 reveal">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Alarms &amp; events</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-2);">Severity-ranked alarms with an acknowledge/clear workflow, filterable by state and source, so nothing gets lost in the noise.</p>
+        </div>
+
+        <div class="feature-card p-5 reveal">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Trends &amp; historian</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-2);">Time-series logging per tag, queryable and chartable, so you can see what happened five minutes — or five months — ago.</p>
+        </div>
+
+        <div class="feature-card p-5 reveal">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Engineering portal</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-2);">PLC addressing, element types, operations, and parameters are all point-and-click. No redeploy to change a setpoint range.</p>
+        </div>
+
+        <div class="feature-card p-5 reveal">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 6.5C5 5.12 8.13 4 12 4s7 1.12 7 2.5-3.13 2.5-7 2.5-7-1.12-7-2.5zm0 0V18c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5V6.5" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Storage &amp; product tracking</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-2);">Model silos, tanks, and product batches alongside the process that fills and empties them.</p>
+        </div>
+
+        <div class="feature-card p-5 reveal">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4M16 17H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Parameter control</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-2);">Edit a setpoint, save it, review it — then explicitly push it to the PLC. Two deliberate steps, never an accidental write.</p>
+        </div>
+
+        <div class="feature-card p-5 reveal">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Self-hosted &amp; lightweight</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-2);">One Go binary, SQLite on disk, no build step on the frontend. Runs on a machine you already have on the floor.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section id="how-it-works" class="py-24 px-5" style="border-top:1px solid var(--border); background:var(--bg-sunken);">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl mb-16 reveal">
+        <p class="eyebrow mb-3">How it works</p>
+        <h2 class="font-display font-semibold text-3xl sm:text-4xl mb-4" style="color:var(--text-1);">
+          From field device to browser tab, live.
+        </h2>
+        <p class="text-base leading-relaxed" style="color:var(--text-2);">
+          One data path, no polling. When a PLC value changes, every connected dashboard knows within milliseconds.
+        </p>
+      </div>
+
+      <div class="flow-wrap reveal">
+
+        <div class="flow-node">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-14 5h.01M5 12h.01" />
+            </svg>
+          </div>
+          <p class="eyebrow mb-1" style="color:var(--text-3);">01</p>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Field devices</h3>
+          <p class="text-xs leading-relaxed" style="color:var(--text-2);">PLCs expose live values on an OPC UA server, out on the floor.</p>
+        </div>
+
+        <div class="flow-connector">
+          <svg width="60" height="2" viewBox="0 0 60 2"><line class="flow-line" x1="0" y1="1" x2="60" y2="1"/><line class="flow-dash" x1="0" y1="1" x2="60" y2="1"/></svg>
+        </div>
+
+        <div class="flow-node">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+          </div>
+          <p class="eyebrow mb-1" style="color:var(--text-3);">02</p>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">AutomationField backend</h3>
+          <p class="text-xs leading-relaxed" style="color:var(--text-2);">The Go binary subscribes to those nodes and holds current plant state in memory.</p>
+        </div>
+
+        <div class="flow-connector">
+          <svg width="60" height="2" viewBox="0 0 60 2"><line class="flow-line" x1="0" y1="1" x2="60" y2="1"/><line class="flow-dash" x1="0" y1="1" x2="60" y2="1"/></svg>
+        </div>
+
+        <div class="flow-node">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <p class="eyebrow mb-1" style="color:var(--text-3);">03</p>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">WebSocket broadcast</h3>
+          <p class="text-xs leading-relaxed" style="color:var(--text-2);">Every change is pushed, instantly, to every connected client. No client ever asks twice.</p>
+        </div>
+
+        <div class="flow-connector">
+          <svg width="60" height="2" viewBox="0 0 60 2"><line class="flow-line" x1="0" y1="1" x2="60" y2="1"/><line class="flow-dash" x1="0" y1="1" x2="60" y2="1"/></svg>
+        </div>
+
+        <div class="flow-node">
+          <div class="icon-badge mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <p class="eyebrow mb-1" style="color:var(--text-3);">04</p>
+          <h3 class="text-sm font-semibold mb-1.5" style="color:var(--text-1);">Live dashboard</h3>
+          <p class="text-xs leading-relaxed" style="color:var(--text-2);">The mimic diagram, alarms, and trends update in the browser — no refresh, no delay.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREVIEW / SCREENSHOT SHOWCASE ============ -->
+  <section id="preview" class="py-24 px-5">
+    <div class="max-w-6xl mx-auto">
+      <div class="max-w-2xl mb-14 reveal">
+        <p class="eyebrow mb-3">Real screens, not mockups</p>
+        <h2 class="font-display font-semibold text-3xl sm:text-4xl mb-4" style="color:var(--text-1);">
+          See it before you ask for a demo.
+        </h2>
+      </div>
+
+      <div class="grid lg:grid-cols-[0.85fr,1.15fr] gap-10 items-center">
+        <div class="reveal order-2 lg:order-1">
+          <p class="eyebrow mb-3">Engineering portal</p>
+          <h3 class="font-display font-semibold text-2xl mb-4" style="color:var(--text-1);">Configure the system without touching code.</h3>
+          <p class="text-sm leading-relaxed mb-4" style="color:var(--text-2);">
+            PLC addressing, element type definitions, operations, storages, trends, and users are
+            all managed from one CRUD-driven portal — with a clear "Engineering Mode" warning
+            banner so nobody forgets these changes touch a live system.
+          </p>
+          <ul class="space-y-2.5 text-sm" style="color:var(--text-2);">
+            <li class="flex items-start gap-2.5"><span class="dot dot-ok mt-1.5"></span> Add and address PLCs without redeploying</li>
+            <li class="flex items-start gap-2.5"><span class="dot dot-ok mt-1.5"></span> Define element types, states, and colors</li>
+            <li class="flex items-start gap-2.5"><span class="dot dot-ok mt-1.5"></span> Snapshot &amp; restore system backups</li>
+          </ul>
+        </div>
+        <div class="reveal order-1 lg:order-2">
+          <div class="hmi-frame">
+            <div class="bar"><span></span><span></span><span></span></div>
+            <img src="assets/img/shot-engineering.webp" width="2200" height="1375" loading="lazy"
+                 alt="AutomationField engineering portal showing quick actions, runtime server status, database connection, and PLC connection status" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTERS CTA ============ -->
+  <section id="testers" class="py-20 px-5">
+    <div class="max-w-5xl mx-auto reveal">
+      <div class="alert-banner p-8 sm:p-12">
+        <div class="flex items-start gap-4">
+          <div class="icon-badge shrink-0 hidden sm:flex">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <div>
+            <p class="eyebrow mb-3">Looking for testers</p>
+            <h2 class="font-display font-semibold text-2xl sm:text-3xl mb-4" style="color:var(--text-1);">
+              I'm looking for a few people to try it before everyone else.
+            </h2>
+            <p class="text-sm sm:text-base leading-relaxed mb-7 max-w-2xl" style="color:var(--text-2);">
+              AutomationField is far enough along to run a real demo, and I'd rather hear what's
+              broken now than after it matters. If you work with PLCs, OPC&nbsp;UA, or plant-floor
+              software — or you just want to poke at an industrial dashboard — tell me a bit about
+              your setup and I'll get you a live demo instance. No cost, just honest feedback.
+            </p>
+            <a href="mailto:haveljan002@gmail.com?subject=AutomationField%20demo%20request" class="btn btn-primary">Request a demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="py-24 px-5" style="border-top:1px solid var(--border); background:var(--bg-sunken);">
+    <div class="max-w-3xl mx-auto text-center reveal">
+      <p class="eyebrow mb-3">Get in touch</p>
+      <h2 class="font-display font-semibold text-3xl sm:text-4xl mb-5" style="color:var(--text-1);">
+        Questions, feedback, or you just want to talk PLCs.
+      </h2>
+      <p class="text-base leading-relaxed mb-8" style="color:var(--text-2);">
+        This is an independent, solo-built project — email goes straight to me, no ticket queue.
+      </p>
+      <a href="mailto:haveljan002@gmail.com"
+         class="inline-flex items-center gap-3 panel px-6 py-4 font-mono text-base sm:text-lg transition-colors"
+         style="color:var(--text-1);"
+         onmouseover="this.style.borderColor='#4a3323'; this.style.background='var(--bg-raised)';"
+         onmouseout="this.style.borderColor='var(--border)'; this.style.background='var(--bg-panel)';">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:var(--accent);" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        haveljan002@gmail.com
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="px-5 py-8" style="border-top:1px solid var(--border);">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5">
+      <span class="w-6 h-6 rounded flex items-center justify-center" style="background:var(--accent-dim); border:1px solid #3a1c0c;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:var(--accent);">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+        </svg>
+      </span>
+      <span class="text-xs font-semibold uppercase tracking-widest" style="color:var(--text-2);">AutomationField</span>
+    </div>
+    <p class="text-xs" style="color:var(--text-3);">© <span id="year">2026</span> — an independent SCADA project.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
